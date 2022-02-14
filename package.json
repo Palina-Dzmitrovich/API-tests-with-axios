@@ -1,0 +1,34 @@
+{
+  "name": "api-tests-with-axios",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --reporter mochawesome"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Palina-Dzmitrovich/API-tests-with-axios.git"
+  },
+  "keywords": [
+    "axios",
+    "api",
+    "testing"
+  ],
+  "author": "Palina Dzmitrovich",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Palina-Dzmitrovich/API-tests-with-axios/issues"
+  },
+  "homepage": "https://github.com/Palina-Dzmitrovich/API-tests-with-axios#readme",
+  "dependencies": {
+    "axios": "^0.25.0",
+    "winston": "^3.6.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "eslint": "^8.9.0",
+    "mocha": "^9.2.0",
+    "mochawesome": "^7.0.1"
+  }
+}
