@@ -5,9 +5,9 @@
     "passes": 2,
     "pending": 0,
     "failures": 0,
-    "start": "2022-02-14T19:26:25.218Z",
-    "end": "2022-02-14T19:26:26.477Z",
-    "duration": 1259,
+    "start": "2022-02-15T09:00:44.775Z",
+    "end": "2022-02-15T09:00:46.510Z",
+    "duration": 1735,
     "testsRegistered": 2,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "0fb3bea7-03c6-4ff8-819a-bcc88b790cf9",
+      "uuid": "895446d3-b71a-4dfb-94dc-36870183200e",
       "title": "",
       "fullFile": "",
       "file": "",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "d8e60f4b-ea7f-45a0-bb1b-c9a2997430d4",
+          "uuid": "722c81fb-b2c2-4f47-bc0f-7b2d239b3eda",
           "title": "Store inventory should have status code 200",
           "fullFile": "C:\\Users\\UC264228\\Learning\\api\\API-tests-with-axios\\test\\petStoreTests.spec.js",
           "file": "\\test\\petStoreTests.spec.js",
@@ -38,7 +38,7 @@
               "title": "Should have status code 200",
               "fullTitle": "Store inventory should have status code 200 Should have status code 200",
               "timedOut": false,
-              "duration": 764,
+              "duration": 1121,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -47,27 +47,27 @@
               "context": null,
               "code": "let statusCode = await ApiHelper.getStatusCode(urls.storeInventory);\nexpect(statusCode).to.equal(200);",
               "err": {},
-              "uuid": "e91615f5-f6a0-4458-8d28-3a5881fad839",
-              "parentUUID": "d8e60f4b-ea7f-45a0-bb1b-c9a2997430d4",
+              "uuid": "f0ba28a0-7917-4b7d-8ed6-bc64d6d8b340",
+              "parentUUID": "722c81fb-b2c2-4f47-bc0f-7b2d239b3eda",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "e91615f5-f6a0-4458-8d28-3a5881fad839"
+            "f0ba28a0-7917-4b7d-8ed6-bc64d6d8b340"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 764,
+          "duration": 1121,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
         },
         {
-          "uuid": "af9a766e-bfb6-4d33-928d-83e6b29b24cc",
-          "title": "Should return an error when an invalid id is passed",
+          "uuid": "95cca8b4-3328-4184-894b-60a342d7b220",
+          "title": "Should return 404 when an invalid id is passed",
           "fullFile": "C:\\Users\\UC264228\\Learning\\api\\API-tests-with-axios\\test\\petStoreTests.spec.js",
           "file": "\\test\\petStoreTests.spec.js",
           "beforeHooks": [],
@@ -75,9 +75,9 @@
           "tests": [
             {
               "title": "Should display an error message",
-              "fullTitle": "Should return an error when an invalid id is passed Should display an error message",
+              "fullTitle": "Should return 404 when an invalid id is passed Should display an error message",
               "timedOut": false,
-              "duration": 485,
+              "duration": 604,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -86,20 +86,20 @@
               "context": null,
               "code": "let response = await ApiHelper.getById(urls.pet, 'blah');\nexpect(response.message).to.equal('Request failed with status code 404');",
               "err": {},
-              "uuid": "abc99e21-fdb7-4108-8354-3f4dd5589e3b",
-              "parentUUID": "af9a766e-bfb6-4d33-928d-83e6b29b24cc",
+              "uuid": "7d4a50fe-1d06-446d-b43b-02f9b8b3c069",
+              "parentUUID": "95cca8b4-3328-4184-894b-60a342d7b220",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "abc99e21-fdb7-4108-8354-3f4dd5589e3b"
+            "7d4a50fe-1d06-446d-b43b-02f9b8b3c069"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 485,
+          "duration": 604,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
