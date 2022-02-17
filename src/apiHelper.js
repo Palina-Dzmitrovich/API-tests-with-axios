@@ -1,5 +1,6 @@
 const axios = require ('axios');
 const logger = require('../configs/logger');
+const CommonHelper = require('./commonHelper')
 
 class ApiHelper {
 
@@ -39,12 +40,51 @@ class ApiHelper {
         } 
     }
 
-    static async postANewPet(url, data) {
+    static async postAnEntry(url, data) {
         try {
             await axios.post(url, data);
-            logger.info(`Adding a pet with id ${data.id} to ${url}`);
+            logger.info(`Adding an item with id ${data.id} to ${url}`);
         } catch (error) {
             logger.error(`Failed when posting to ${url}.  Message: ${error.message}`);
+        }
+    }
+
+    static async deletewithRetry(url, id, config, limit, timeInterval) {
+        for(let i = 0; i < limit; i++) {
+                try {
+                    await CommonHelper.wait(timeInterval);
+                    await axios.delete(`${url}/${id}`, config);
+                    logger.warn(`Deleting ${url}/${id}`);
+                    break;
+                } catch (error) {
+                    logger.error(`Failed deleting from ${url}/${id}.  Message: ${error.message}`); 
+                    if(i < limit) {
+                        logger.info('Retrying...')
+                    } else if (i === limit) {
+                        return error;
+                    }
+                }
+        }
+    }
+
+    static async getWithRetry(url, id, limit, timeInterval) {
+        for (let i = 0; i < limit; i++) {
+            try {
+                await CommonHelper.wait(timeInterval);
+                const response = await axios.get(`${url}/${id}`);
+                logger.info(`Requesting ${url}/${id}`);
+                return response;
+    
+            } catch (error) {
+                logger.error(`Failed when requesting ${url}/${id}. Message: ${error.message}`);
+                if(i < limit) {
+                    logger.info('Retrying...')
+                } else if (i === limit) {
+                    return error;
+                }
+            }
+
+
         }
     }
 
