@@ -27,6 +27,18 @@ class ApiHelper {
         }
     }
 
+    static async findByQueryParameter(url, parameterName, parameterValue) {
+        try {
+            const response = await axios.get(`${url}?${parameterName}=${parameterValue}`);
+            logger.info(`Requesting ${url}?${parameterName}=${parameterValue}`);
+            return response;
+
+        } catch (error) {
+            logger.error(`Failed when requesting ${url}?${parameterName}=${parameterValue}. Message: ${error.message}`);
+            return error;
+        } 
+    }
+
 }
 
 module.exports = ApiHelper;

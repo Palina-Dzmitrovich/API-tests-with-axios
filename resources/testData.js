@@ -1,10 +1,16 @@
 const baseUrl = 'https://petstore.swagger.io/v2';
 
-const urls = {
-    pet: `${baseUrl}/pet`,
-    storeInventory: `${baseUrl}/store/inventory`,
+const testData = {
+
+    urls: {
+        pet: `${baseUrl}/pet`,
+        storeInventory: `${baseUrl}/store/inventory`,
+        findByStatus: `${baseUrl}/pet/findByStatus`
+    },
+
+    petStatus: ['available', 'pending', 'sold'],
 
 }
 
-module.exports = urls;
+module.exports = testData;
 
