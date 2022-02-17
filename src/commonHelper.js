@@ -2,7 +2,7 @@ const logger = require('../configs/logger');
 
 class CommonHelper {
 
-    static provideRandomVal(array) {
+    static provideRandomValFromArr(array) {
         let index = Math.floor(Math.random() * array.length);
         logger.info(`The random value in use is: "${array[index]}"`);
         return array[index];
@@ -25,6 +25,10 @@ class CommonHelper {
     static wait(time) {
         logger.info(`Waiting for ${time}ms`);
         return new Promise( (resolve) => { setTimeout(resolve, time) });
+    }
+
+    static provideRandomNumber(limit) {
+        return Math.floor(Math.random() * limit);
     }
 
 }

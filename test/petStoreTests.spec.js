@@ -2,9 +2,9 @@ const chai = require('chai');
 const expect = chai.expect;
 const ApiHelper = require ('../src/apiHelper');
 const testData = require ('../resources/testData');
-const { provideRandomVal } = require('../src/commonHelper');
 const CommonHelper = require('../src/commonHelper');
-const newPet = require('../resources/newPet.json');
+
+let newPetId = CommonHelper.provideRandomNumber(10000);
 
 
 describe('Store inventory should have status code 200', function() {
@@ -30,7 +30,7 @@ describe('Should return 404 when an invalid id is passed', function() {
 describe('Should find pets by a valid status', function() {
 
     it('Should find pets by a valid status', async function() {
-        let status = provideRandomVal(testData.petStatus);
+        let status = CommonHelper.provideRandomValFromArr(testData.petStatus);
         let response = await ApiHelper.findByQueryParameter(testData.urls.findByStatus, 'status', status);
         await console.log(response.data[0].status);
         let resultStatuses = await CommonHelper.findProperties('status', response);
@@ -41,12 +41,23 @@ describe('Should find pets by a valid status', function() {
 
 });
 
-describe('Sould be able to add a new pet', function() {
+describe('Should be able to add a new pet', function() {
 
     it('Should be able to add a pet', async function() {
-        await ApiHelper.postANewPet(testData.urls.pet, newPet);
-        await CommonHelper.wait(3000);
-        let response = await ApiHelper.getById(testData.urls.pet, newPet.id);
-        expect(JSON.stringify(response.data)).to.equal(JSON.stringify(newPet));
+        testData.newPet.id = newPetId;
+        await ApiHelper.postAnEntry(testData.urls.pet, testData.newPet);
+        let response = await ApiHelper.getWithRetry(testData.urls.pet, testData.newPet.id, 10, 10000);
+        expect(JSON.stringify(response.data)).to.equal(JSON.stringify(testData.newPet));
+    });
+});
+
+describe('Should be able to delete a pet', function() {
+
+    it('Should be able to delete a pet', async function() {
+        let responseBefore = await ApiHelper.getWithRetry(testData.urls.pet, newPetId, 10, 10000);
+        await ApiHelper.deletewithRetry(testData.urls.pet, newPetId, testData.config, 10, 5000);
+        let responseAfter = await ApiHelper.getById(testData.urls.pet, newPetId);
+        expect(responseBefore.data.id).to.equal(newPetId);
+        expect(responseAfter.response.data.message).to.equal('Pet not found');
     });
 });

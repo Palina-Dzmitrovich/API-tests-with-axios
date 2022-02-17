@@ -10,6 +10,31 @@ const testData = {
 
     petStatus: ['available', 'pending', 'sold'],
 
+    config: {
+        headers: {
+            api_key: 'special-key'
+        }
+    },
+
+    newPet: {
+        id: 'placeholder',
+        category: {
+          id: 0,
+          name: "string"
+        },
+        name: "Igor The Cool",
+        photoUrls: [
+          "string"
+        ],
+        tags: [
+          {
+            "id": 0,
+            "name": "string"
+          }
+        ],
+        status: "pending"
+      }
+
 }
 
 module.exports = testData;
