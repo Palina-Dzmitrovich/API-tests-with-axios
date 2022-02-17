@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --reporter mochawesome"
+    "test": "mocha --reporter mochawesome --no-timeouts"
   },
   "repository": {
     "type": "git",
