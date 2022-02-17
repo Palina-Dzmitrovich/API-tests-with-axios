@@ -33,6 +33,25 @@ const testData = {
           }
         ],
         status: "pending"
+      },
+
+      updatedPet: {
+        id: 'placeholder',
+        category: {
+          id: 0,
+          name: "string"
+        },
+        name: "Kolya",
+        photoUrls: [
+          "string"
+        ],
+        tags: [
+          {
+            "id": 0,
+            "name": "string"
+          }
+        ],
+        status: "sold"
       }
 
 }

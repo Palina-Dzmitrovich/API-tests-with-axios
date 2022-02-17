@@ -51,13 +51,25 @@ describe('Should be able to add a new pet', function() {
     });
 });
 
+describe('Should be able to update an existing pet', function() {
+
+    it('Should be able to update an existing pet', async function() {
+        testData.updatedPet.id = newPetId;
+        await ApiHelper.updateAnExistingEntry(testData.urls.pet, testData.updatedPet);
+        let response = await ApiHelper.getWithRetry(testData.urls.pet, testData.newPet.id, 10, 10000);
+        expect(JSON.stringify(response.data)).to.equal(JSON.stringify(testData.updatedPet));
+    });
+});
+
 describe('Should be able to delete a pet', function() {
 
     it('Should be able to delete a pet', async function() {
         let responseBefore = await ApiHelper.getWithRetry(testData.urls.pet, newPetId, 10, 10000);
         await ApiHelper.deletewithRetry(testData.urls.pet, newPetId, testData.config, 10, 5000);
+        CommonHelper.wait(5000);
         let responseAfter = await ApiHelper.getById(testData.urls.pet, newPetId);
         expect(responseBefore.data.id).to.equal(newPetId);
         expect(responseAfter.response.data.message).to.equal('Pet not found');
     });
 });
+
