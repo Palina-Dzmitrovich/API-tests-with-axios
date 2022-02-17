@@ -19,8 +19,12 @@ class CommonHelper {
 
         logger.info(`Properties found: ${[...propertiesFound]}`);
 
-        return [...propertiesFound];
-        
+        return [...propertiesFound];   
+    }
+
+    static wait(time) {
+        logger.info(`Waiting for ${time}ms`);
+        return new Promise( (resolve) => { setTimeout(resolve, time) });
     }
 
 }

@@ -4,6 +4,7 @@ const ApiHelper = require ('../src/apiHelper');
 const testData = require ('../resources/testData');
 const { provideRandomVal } = require('../src/commonHelper');
 const CommonHelper = require('../src/commonHelper');
+const newPet = require('../resources/newPet.json');
 
 
 describe('Store inventory should have status code 200', function() {
@@ -38,4 +39,14 @@ describe('Should find pets by a valid status', function() {
         expect(resultStatuses[0]).to.equal(status);
     });
 
+});
+
+describe('Sould be able to add a new pet', function() {
+
+    it('Should be able to add a pet', async function() {
+        await ApiHelper.postANewPet(testData.urls.pet, newPet);
+        await CommonHelper.wait(3000);
+        let response = await ApiHelper.getById(testData.urls.pet, newPet.id);
+        expect(JSON.stringify(response.data)).to.equal(JSON.stringify(newPet));
+    });
 });

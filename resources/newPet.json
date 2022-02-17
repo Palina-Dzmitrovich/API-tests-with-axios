@@ -1,0 +1,18 @@
+{
+    "id": 55556666,
+    "category": {
+      "id": 0,
+      "name": "string"
+    },
+    "name": "Igor The Cool",
+    "photoUrls": [
+      "string"
+    ],
+    "tags": [
+      {
+        "id": 0,
+        "name": "string"
+      }
+    ],
+    "status": "pending"
+  }
