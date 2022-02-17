@@ -39,6 +39,15 @@ class ApiHelper {
         } 
     }
 
+    static async postANewPet(url, data) {
+        try {
+            await axios.post(url, data);
+            logger.info(`Adding a pet with id ${data.id} to ${url}`);
+        } catch (error) {
+            logger.error(`Failed when posting to ${url}.  Message: ${error.message}`);
+        }
+    }
+
 }
 
 module.exports = ApiHelper;
