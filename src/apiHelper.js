@@ -91,9 +91,18 @@ class ApiHelper {
                     return error;
                 }
             }
-
-
         }
+    }
+
+    static async updateAnExistingEntry(url, data) {
+        try {
+            await axios.put(url, data);
+            logger.info(`Updating an item at ${url}`);
+        } catch (error) {
+            logger.error(`Failed when updating ${url}. Message: ${error.message}`);
+            return error;
+        }
+
     }
 
 }
