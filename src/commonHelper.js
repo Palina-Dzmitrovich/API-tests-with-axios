@@ -11,7 +11,7 @@ class CommonHelper {
     static findProperties(propertyName, obj) {
         let values = [];
 
-        for(let i = 0; i < obj.data.length; i++) {
+        for (let i = 0; i < obj.data.length; i++) {
             values.push(obj.data[i][propertyName]);
         }
 
@@ -19,12 +19,12 @@ class CommonHelper {
 
         logger.info(`Properties found: ${[...propertiesFound]}`);
 
-        return [...propertiesFound];   
+        return [...propertiesFound];
     }
 
     static wait(time) {
         logger.info(`Waiting for ${time}ms`);
-        return new Promise( (resolve) => { setTimeout(resolve, time) });
+        return new Promise((resolve) => { setTimeout(resolve, time) });
     }
 
     static provideRandomNumber(limit) {
