@@ -1,4 +1,4 @@
-const axios = require ('axios');
+const axios = require('axios');
 const logger = require('../configs/logger');
 const CommonHelper = require('./commonHelper')
 
@@ -37,7 +37,7 @@ class ApiHelper {
         } catch (error) {
             logger.error(`Failed when requesting ${url}?${parameterName}=${parameterValue}. Message: ${error.message}`);
             return error;
-        } 
+        }
     }
 
     static async postAnEntry(url, data) {
@@ -50,20 +50,20 @@ class ApiHelper {
     }
 
     static async deletewithRetry(url, id, config, limit, timeInterval) {
-        for(let i = 0; i < limit; i++) {
-                try {
-                    await CommonHelper.wait(timeInterval);
-                    await axios.delete(`${url}/${id}`, config);
-                    logger.warn(`Deleting ${url}/${id}`);
-                    break;
-                } catch (error) {
-                    logger.error(`Failed deleting from ${url}/${id}.  Message: ${error.message}`); 
-                    if(i < limit) {
-                        logger.info('Retrying...')
-                    } else if (i === limit) {
-                        return error;
-                    }
+        for (let i = 0; i < limit; i++) {
+            try {
+                await CommonHelper.wait(timeInterval);
+                await axios.delete(`${url}/${id}`, config);
+                logger.warn(`Deleting ${url}/${id}`);
+                break;
+            } catch (error) {
+                logger.error(`Failed deleting from ${url}/${id}.  Message: ${error.message}`);
+                if (i < limit) {
+                    logger.info('Retrying...')
+                } else if (i === limit) {
+                    return error;
                 }
+            }
         }
     }
 
@@ -74,10 +74,10 @@ class ApiHelper {
                 const response = await axios.get(`${url}/${id}`);
                 logger.info(`Requesting ${url}/${id}`);
                 return response;
-    
+
             } catch (error) {
                 logger.error(`Failed when requesting ${url}/${id}. Message: ${error.message}`);
-                if(i < limit) {
+                if (i < limit) {
                     logger.info('Retrying...')
                 } else if (i === limit) {
                     return error;
@@ -91,7 +91,7 @@ class ApiHelper {
             await axios.put(url, data);
             logger.info(`Updating an item at ${url}`);
         } catch (error) {
-            logger.error(`Failed when updating ${url}. Message: ${error.message}`); 
+            logger.error(`Failed when updating ${url}. Message: ${error.message}`);
             return error;
         }
 
