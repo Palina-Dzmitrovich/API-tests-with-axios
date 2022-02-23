@@ -10,7 +10,7 @@ let newPetId = CommonHelper.provideRandomNumber(10000);
 describe('Store inventory should have status code 200', function () {
 
     it('Should have status code 200', async function () {
-        let statusCode = await ApiHelper.getStatusCode(testData.urls.storeInventory);
+        let statusCode = await ApiHelper.getStatusCode(testData.urls.storeInventory, false);
 
         expect(statusCode).to.equal(200);
     });
