@@ -2,12 +2,15 @@ const axios = require('axios');
 const logger = require('../configs/logger');
 const CommonHelper = require('./commonHelper');
 const axiosProxy = require('../configs/axiosProxy');
+const testConfig = require('../configs/testConfig');
+
+const proxyConfig = (testConfig.proxy === true) ? axiosProxy : '';
 
 class ApiHelper {
 
     static async getStatusCode(url) {
         try {
-            const response = await axios.get(`${url}`, axiosProxy);
+            const response = await axios.get(`${url}`, proxyConfig);
             logger.info(`Requesting ${url}`);
 
             return response.status;
@@ -21,7 +24,7 @@ class ApiHelper {
 
     static async getById(url, id) {
         try {
-            const response = await axios.get(`${url}/${id}`, axiosProxy);
+            const response = await axios.get(`${url}/${id}`, proxyConfig);
             logger.info(`Requesting ${url}/${id}`);
 
             return response;
@@ -35,7 +38,7 @@ class ApiHelper {
 
     static async findByQueryParameter(url, parameterName, parameterValue) {
         try {
-            const response = await axios.get(`${url}?${parameterName}=${parameterValue}`, axiosProxy);
+            const response = await axios.get(`${url}?${parameterName}=${parameterValue}`, proxyConfig);
             logger.info(`Requesting ${url}?${parameterName}=${parameterValue}`);
 
             return response;
@@ -49,7 +52,7 @@ class ApiHelper {
 
     static async postAnEntry(url, data) {
         try {
-            await axios.post(url, data, axiosProxy);
+            await axios.post(url, data, proxyConfig);
             logger.info(`Adding an item with id ${data.id} to ${url}`);
         } catch (error) {
             logger.error(`Failed when posting to ${url}.  Message: ${error.message}`);
@@ -60,7 +63,7 @@ class ApiHelper {
         for (let i = 0; i < limit; i++) {
             try {
                 await CommonHelper.wait(timeInterval);
-                await axios.delete(`${url}/${id}`, config, axiosProxy);
+                await axios.delete(`${url}/${id}`, config, proxyConfig);
                 logger.warn(`Deleting ${url}/${id}`);
                 break;
             } catch (error) {
@@ -78,7 +81,7 @@ class ApiHelper {
         for (let i = 0; i < limit; i++) {
             try {
                 await CommonHelper.wait(timeInterval);
-                const response = await axios.get(`${url}/${id}`, axiosProxy);
+                const response = await axios.get(`${url}/${id}`, proxyConfig);
                 logger.info(`Requesting ${url}/${id}`);
 
                 return response;
@@ -96,7 +99,7 @@ class ApiHelper {
 
     static async updateAnExistingEntry(url, data) {
         try {
-            await axios.put(url, data);
+            await axios.put(url, data, proxyConfig);
             logger.info(`Updating an item at ${url}`);
         } catch (error) {
             logger.error(`Failed when updating ${url}. Message: ${error.message}`);
