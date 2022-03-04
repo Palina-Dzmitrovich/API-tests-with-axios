@@ -67,7 +67,7 @@ describe('Should be able to delete a pet', function () {
 
     it('Should be able to delete a pet', async function () {
         let responseBefore = await ApiHelper.getWithRetry(testData.urls.pet, newPetId, 10, 10000);
-        await ApiHelper.deletewithRetry(testData.urls.pet, newPetId, testData.config, 10, 5000);
+        await ApiHelper.deletewithRetry(testData.urls.pet, newPetId, testData.config, 10, 10000);
         CommonHelper.wait(5000);
         let responseAfter = await ApiHelper.getById(testData.urls.pet, newPetId);
 
